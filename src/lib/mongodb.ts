@@ -7,6 +7,8 @@ if (!uri) {
 }
 
 const client = new MongoClient(uri);
-client.connect();
+client.connect().then(() => console.log("MONGO CONNECTED")).catch((err) => console.error("MONGO ERR", err));
 
-export default client;
+const db = client.db("god-tracker");
+
+export default db;

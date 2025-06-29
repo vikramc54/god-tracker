@@ -1,18 +1,16 @@
-import { getServerSession } from "next-auth/next";
-import type { NextApiRequest, NextApiResponse } from "next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route"; // adjust path as needed
-import type { Session } from "next-auth";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export default async function requireSession(
-    req: NextApiRequest,
-    res: NextApiResponse
-): Promise<Session | null> {
-    const session = await getServerSession(req, res, authOptions);
+export default async function requireSession() {
+    const session = await getServerSession(authOptions);
 
-    if (session) {
-        return session;
-    } else {
-        res.status(401).end("Unauthorized");
-        return null;
+    if (session?.user) {
+        return session.user as {
+            name: string;
+            email: string;
+            image?: string;
+        };
     }
+
+    throw new Error("Unauthorized");
 }
