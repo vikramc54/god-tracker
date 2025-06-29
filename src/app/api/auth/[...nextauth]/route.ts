@@ -1,3 +1,4 @@
+import { NextAuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 
@@ -8,7 +9,7 @@ if (!process.env.NEXTAUTH_SECRET) {
     throw new Error("Missing NEXTAUTH_SECRET");
 }
 
-const handler = NextAuth({
+const authOptions: NextAuthOptions = {
     providers: [
         GoogleProvider({
             clientId: process.env.GOOGLE_ID,
@@ -22,6 +23,8 @@ const handler = NextAuth({
         },
     },
     
-});
+};
 
-export { handler as GET, handler as POST };
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST, authOptions };
