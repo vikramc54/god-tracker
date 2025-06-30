@@ -5,6 +5,7 @@ import AmountField from "./AmountField";
 import TimestampField from "./TimestampField";
 import CategoriesField from "./CategoriesField";
 import SubmitButton from "./SubmitButton";
+import mixpanel from "mixpanel-browser";
 
 interface ExpenseDto {
   amount: number;
@@ -68,7 +69,15 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
         
         // Notify parent component
         onExpenseAdded();
-        
+
+        const { id } = (await response.json()) as { id: string };
+
+        mixpanel.track("ExpenseAdded", {
+          id,
+          ...expenseData,
+          isDebug: process.env.NEXT_IS_DEBUG === "true",
+        });
+
         alert("Expense added successfully!");
       } else {
         throw new Error("Failed to add expense");
