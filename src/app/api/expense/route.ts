@@ -1,6 +1,5 @@
 import requireSession from "@/lib/auth";
 import db from "@/lib/mongodb";
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextResponse } from "next/server";
 
 interface ExpenseDto {
