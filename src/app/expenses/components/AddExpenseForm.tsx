@@ -81,6 +81,7 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
           categories: selectedCategories,
           isDebug: process.env.NEXT_PUBLIC_IS_DEBUG === "true",
           $time: timeInSeconds,
+          time: timeInSeconds,
         });
 
         alert("Expense added successfully!");
