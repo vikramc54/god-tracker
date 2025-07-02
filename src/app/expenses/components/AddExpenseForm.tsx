@@ -73,15 +73,6 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
         // Notify parent component
         onExpenseAdded();
 
-        // mixpanel.track("ExpenseAdded", {
-        //   id,
-        //   amount: parseFloat(amount),
-        //   categories: selectedCategories,
-        //   isDebug: process.env.NEXT_PUBLIC_IS_DEBUG === "true",
-        //   $time: timeInSeconds,
-        //   time: timeInSeconds,
-        // });
-
         alert("Expense added successfully!");
       } else {
         throw new Error("Failed to add expense");

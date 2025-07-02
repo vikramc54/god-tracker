@@ -18,7 +18,7 @@ export interface Expense {
     isDebug: boolean;
 }
 
-const isDebug = process.env.NEXT_PUBLIC_IS_DEBUG === "true";
+const isDebug = process.env.IS_DEBUG === "true";
 
 export async function POST(req: Request) {
     try {

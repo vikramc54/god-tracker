@@ -1,9 +1,9 @@
 import { Expense } from "@/app/api/expense/route";
 import Mixpanel from "mixpanel";
-const mixpanelToken = process.env.NEXT_PUBLIC_MIXPANEL_TOKEN;
+const mixpanelToken = process.env.MIXPANEL_TOKEN;
 const mixpanelSecret = process.env.MIXPANEL_SECRET;
 
-if (!mixpanelToken) throw new Error("Missing env variable NEXT_PUBLIC_MIXPANEL_TOKEN");
+if (!mixpanelToken) throw new Error("Missing env variable MIXPANEL_TOKEN");
 if (!mixpanelSecret) throw new Error("Missing env variable MIXPANEL_SECRET");
 const mp = Mixpanel.init(mixpanelToken, {
     secret: mixpanelSecret,

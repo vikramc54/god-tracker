@@ -31,7 +31,7 @@ export async function GET(req: Request) {
                             $gte: start,
                             $lt: end,
                         },
-                        ...(process.env.NEXT_PUBLIC_IS_DEBUG === "true" ? {} : { isDebug: false }),
+                        ...(process.env.IS_DEBUG === "true" ? {} : { isDebug: false }),
                     },
                 },
                 {
