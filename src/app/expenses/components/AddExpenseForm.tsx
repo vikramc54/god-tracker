@@ -48,6 +48,9 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
     setIsSubmitting(true);
 
     try {
+      const time = new Date(timestamp);
+      const timeInSeconds = Math.floor(time.getTime() / 1000);
+
       const expenseData: ExpenseDto = {
         amount: parseFloat(amount),
         categories: selectedCategories,
@@ -74,8 +77,10 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
 
         mixpanel.track("ExpenseAdded", {
           id,
-          ...expenseData,
-          isDebug: process.env.NEXT_IS_DEBUG === "true",
+          amount: parseFloat(amount),
+          categories: selectedCategories,
+          isDebug: process.env.NEXT_PUBLIC_IS_DEBUG === "true",
+          $time: timeInSeconds,
         });
 
         alert("Expense added successfully!");

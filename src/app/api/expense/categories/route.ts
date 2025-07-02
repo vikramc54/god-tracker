@@ -3,7 +3,7 @@ import db from "@/lib/mongodb";
 import { Expense } from "../route";
 import { NextResponse } from "next/server";
 
-const isDebug = process.env.NEXT_IS_DEBUG === "true";
+const isDebug = process.env.NEXT_PUBLIC_IS_DEBUG === "true";
 
 export async function GET() {
     try {
