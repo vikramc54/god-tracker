@@ -1,4 +1,5 @@
 import requireSession from "@/lib/auth";
+import { trackExpense } from "@/lib/mixpanel";
 import db from "@/lib/mongodb";
 import { NextResponse } from "next/server";
 
@@ -37,6 +38,8 @@ export async function POST(req: Request) {
             timestamp,
             isDebug,
         };
+
+        await trackExpense(expense);
 
         const result = await db.collection<Expense>("expenses").insertOne(expense);
         if (!result.acknowledged) {

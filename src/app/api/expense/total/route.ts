@@ -5,7 +5,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
     try {
-        console.log("HITTING THIS API");
         const user = await requireSession();
         if (!user) return new Response("Unauthorized", { status: 401 });
 
@@ -43,7 +42,6 @@ export async function GET(req: Request) {
                 },
             ])
             .toArray();
-        console.log("result", result);
 
         if (!result) {
             throw new Error("Failed to get total");

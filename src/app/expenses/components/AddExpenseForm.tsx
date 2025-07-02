@@ -5,7 +5,7 @@ import AmountField from "./AmountField";
 import TimestampField from "./TimestampField";
 import CategoriesField from "./CategoriesField";
 import SubmitButton from "./SubmitButton";
-import mixpanel from "mixpanel-browser";
+// import mixpanel from "mixpanel-browser";
 
 interface ExpenseDto {
   amount: number;
@@ -48,8 +48,8 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
     setIsSubmitting(true);
 
     try {
-      const time = new Date(timestamp);
-      const timeInSeconds = Math.floor(time.getTime() / 1000);
+      // const time = new Date(timestamp);
+      // const timeInSeconds = Math.floor(time.getTime() / 1000);
 
       const expenseData: ExpenseDto = {
         amount: parseFloat(amount),
@@ -73,16 +73,14 @@ export default function AddExpenseForm({ onExpenseAdded }: AddExpenseFormProps) 
         // Notify parent component
         onExpenseAdded();
 
-        const { id } = (await response.json()) as { id: string };
-
-        mixpanel.track("ExpenseAdded", {
-          id,
-          amount: parseFloat(amount),
-          categories: selectedCategories,
-          isDebug: process.env.NEXT_PUBLIC_IS_DEBUG === "true",
-          $time: timeInSeconds,
-          time: timeInSeconds,
-        });
+        // mixpanel.track("ExpenseAdded", {
+        //   id,
+        //   amount: parseFloat(amount),
+        //   categories: selectedCategories,
+        //   isDebug: process.env.NEXT_PUBLIC_IS_DEBUG === "true",
+        //   $time: timeInSeconds,
+        //   time: timeInSeconds,
+        // });
 
         alert("Expense added successfully!");
       } else {
